@@ -5,6 +5,7 @@
 - Fix typo in the `BUILD_WITH_GEO_LIBRARIES` end-of-life error message ([#1307](https://github.com/heroku/heroku-buildpack-python/pull/1307)).
 - No longer set a fallback value for `$STACK`, since it is always set on Heroku ([#1308](https://github.com/heroku/heroku-buildpack-python/pull/1308)).
 - Adjust the configure options and packaging process for Python 3.7 releases, to enable loadable extensions in the `_sqlite` module, and to remove the `idle_test` module ([#1309](https://github.com/heroku/heroku-buildpack-python/pull/1309)). This change will only take effect as of the next Python 3.7 release (3.7.14).
+- Add support for Heroku-22 ([#1299](https://github.com/heroku/heroku-buildpack-python/pull/1299)).
 
 ## v209 (2022-03-24)
 

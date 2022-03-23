@@ -12,6 +12,11 @@ VERSION=$(echo "${FORMULA_FILENAME}" | cut --delimiter '-' --fields 2)
 
 echo "Building Python ${VERSION}..."
 
+if [[ "${STACK}" == "heroku-22" && "${VERSION}" == 3.[7-8].* ]]; then
+  echo "Python 3.7 and 3.8 are not supported on Heroku-22!" >&2
+  exit 1
+fi
+
 # See: https://www.python.org/downloads/ -> "OpenPGP Public Keys"
 case "${VERSION}" in
   3.10.*)
