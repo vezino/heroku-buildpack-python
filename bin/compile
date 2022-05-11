@@ -372,7 +372,8 @@ mmeasure 'python.size' "$(measure-size)"
 
 # do odoo stuff after python is ready
 LIB_DIR=$ROOT_DIR/lib
-
+# Syntax sugar.
+source $LIB_DIR/utils 
 # Set up outputs under new context
 PROFILE_PATH="$BUILD_DIR/.profile.d/odoo.sh"
 
