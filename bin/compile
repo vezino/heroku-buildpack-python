@@ -369,3 +369,57 @@ fi
 # Measure the size of the Python installation.
 # shellcheck disable=SC2119
 mmeasure 'python.size' "$(measure-size)"
+
+# do odoo stuff after python is ready
+LIB_DIR=$ROOT_DIR/lib
+
+# Set up outputs under new context
+PROFILE_PATH="$BUILD_DIR/.profile.d/odoo.sh"
+
+export LIB_DIR PROFILE_PATH
+
+# Set defaults
+export ODOOKU_ADDONS=""
+export REQUIREMENTS="requirements.txt"
+
+# Enter BUILD_DIR
+pushd $BUILD_DIR > /dev/null
+
+# Install runtimes
+#source $LIB_DIR/steps/runtimes/python
+
+# shebang for pip and other scripts point to:
+#!/app/.heroku/odoo//bin/python
+mkdir -p /app/.heroku/odoo/bin
+#ln -s $BUILD_DIR/.heroku/odoo/bin/python /app/.heroku/odoo/bin/python
+
+# Install libraries
+source $LIB_DIR/steps/libraries/sasl
+source $LIB_DIR/steps/libraries/openldap
+source $LIB_DIR/steps/libraries/lessc
+source $LIB_DIR/steps/libraries/wkhtmltopdf
+
+# Install Odoo
+source $LIB_DIR/steps/odoo-install
+
+# Install requirements
+source $LIB_DIR/steps/pip-install
+
+# Leave
+popd > /dev/null
+
+# Create .profile script for application runtime environment variables.
+set-env PATH "$HOME/.heroku/odoo/bin:$HOME/.heroku/vendor/bin:$PATH"
+#set-env PYTHONUNBUFFERED true
+#set-env PYTHONHOME "$HOME/.heroku/odoo"
+set-env LIBRARY_PATH "$HOME/.heroku/vendor/lib:$HOME/.heroku/odoo/lib:$LIBRARY_PATH"
+set-env LD_LIBRARY_PATH "$HOME/.heroku/vendor/lib:$HOME/.heroku/odoo/lib:$LD_LIBRARY_PATH"
+#set-default-env LANG en_US.UTF-8
+#set-default-env PYTHONHASHSEED random
+#set-default-env PYTHONPATH "$HOME/"
+set-default-env ODOOKU_ADDONS "$ODOOKU_ADDONS"
+
+# Update cache
+rm -rf $CACHE_DIR/.heroku &> /dev/null || true
+mkdir -p $CACHE_DIR/.heroku
+cp -a $BUILD_DIR/.heroku/. $CACHE_DIR/.heroku/
