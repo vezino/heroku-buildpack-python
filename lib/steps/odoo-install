@@ -46,6 +46,7 @@ if [ ! -f ".heroku/odoo/stack.json" ] || [ `echo $STACK | $JQ -cS .` != `$JQ -cS
   cd ./odoo_tmp/addons
   pwd
   ls -la
+  cd /
   puts-line "CHECK IF EXIST:  .heroku/odoo/addons"
   cd .heroku
   pwd
