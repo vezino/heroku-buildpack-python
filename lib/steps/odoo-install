@@ -47,9 +47,14 @@ if [ ! -f ".heroku/odoo/stack.json" ] || [ `echo $STACK | $JQ -cS .` != `$JQ -cS
   pwd
   ls -la
   puts-line "CHECK IF EXIST:  .heroku/odoo/addons"
-  cd .heroku/odoo/addons
+  cd .heroku
   pwd
-  ls -ls
+  ls -la
+  cd odoo
+  pwd
+  ls -la
+  cd addons
+  pwd ls -ls
   puts-line "END DEBUG THIS"
   rm -rf .heroku/odoo/addons &> /dev/null || true
   mv ./odoo_tmp/addons .heroku/odoo/addons
