@@ -62,11 +62,11 @@ if [ ! -f ".heroku/odoo/stack.json" ] || [ `echo $STACK | $JQ -cS .` != `$JQ -cS
   # cd addons
   # pwd ls -ls
   # puts-line "END DEBUG THIS"
-  rm -rf .heroku/odoo/addons &> /dev/null || true
+  #rm -rf .heroku/odoo/addons &> /dev/null || true
   mv ./odoo_tmp/addons .heroku/odoo/addons -v
 
   # Keep stack
-  echo $STACK > /app/.heroku/odoo/stack.json
+  echo $STACK > .heroku/odoo/stack.json
 
   if [ ! -f "./odoo_requirements.txt" ]; then
     cp ./odoo_tmp/requirements.txt ./odoo_requirements.txt
