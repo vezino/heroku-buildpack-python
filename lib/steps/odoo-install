@@ -66,7 +66,7 @@ if [ ! -f ".heroku/odoo/stack.json" ] || [ `echo $STACK | $JQ -cS .` != `$JQ -cS
   mv ./odoo_tmp/addons /app/.heroku/odoo/addons
 
   # Keep stack
-  echo $STACK > .heroku/odoo/stack.json
+  echo $STACK > /app/.heroku/odoo/stack.json
 
   if [ ! -f "./odoo_requirements.txt" ]; then
     cp ./odoo_tmp/requirements.txt ./odoo_requirements.txt
