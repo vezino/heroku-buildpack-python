@@ -39,37 +39,14 @@ if [ ! -f ".heroku/odoo/stack.json" ] || [ `echo $STACK | $JQ -cS .` != `$JQ -cS
 
   pip install --upgrade --no-dependencies --src=./.heroku/src --disable-pip-version-check --no-cache-dir ./odoo_tmp 2>&1 | tee $WARNINGS_LOG | cleanup-pip-output | indent
   
-  # puts-line "DEBUG THIS"
-  # pwd
-  # ls -la
-  # puts-line "CHECK IF EXIST: ./odoo_tmp/addons"
-  # cd ./odoo_tmp/addons
-  # pwd
-  # ls -la
-  # cd /
-  # pwd
-  # ls -la
-  # cd app
-  # pwd
-  # ls -la
-  # puts-line "CHECK IF EXIST:  .heroku/odoo/addons"
-  # cd .heroku
-  # pwd
-  # ls -la
-  # cd odoo
-  # pwd
-  # ls -la
-  # cd addons
-  # pwd ls -ls
-  # puts-line "END DEBUG THIS"
   #rm -rf .heroku/odoo/addons &> /dev/null || true
-  mv ./odoo_tmp/addons .heroku/odoo/addons -v
+  mv ./odoo_tmp/addons /app/.heroku/odoo/addons -v
 
   # Keep stack
-  echo $STACK > .heroku/odoo/stack.json
+  echo $STACK > /app/.heroku/odoo/stack.json
 
   if [ ! -f "./odoo_requirements.txt" ]; then
-    cp ./odoo_tmp/requirements.txt ./odoo_requirements.txt
+    cp ./odoo_tmp/requirements.txt /app/.heroku/odoo_requirements.txt
   else
     puts-line "Detected custom odoo_requirements.txt"
   fi
