@@ -52,7 +52,7 @@ if [ ! -f ".heroku/odoo/stack.json" ] || [ `echo $STACK | $JQ -cS .` != `$JQ -cS
   fi
 
   # Cleanup
-  rm -rf ./odoo_tmp
+  #rm -rf ./odoo_tmp
 else
   puts-line "Odoo installation is up to date"
 fi
