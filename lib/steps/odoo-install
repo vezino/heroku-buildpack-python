@@ -17,7 +17,7 @@ fi
 STACK="{\"odoo\":{\"repo\": \"$ODOO_REPO\", \"branch\": \"$ODOO_BRANCH\", \"commit\": \"$ODOO_COMMIT\"}}"
 
 # See if anything has changed
-if [ ! -f ".heroku/odoo/stack.json" ] || [ `echo $STACK | $JQ -cS .` != `$JQ -cS . .heroku/odoo/stack.json` ]; then
+if [ ! -f ".heroku/python/stack.json" ] || [ `echo $STACK | $JQ -cS .` != `$JQ -cS . .heroku/python/stack.json` ]; then
 
   puts-line "New Odoo installation detected"
   ODOO_ARCHIVE="$GITHUB_URL/$ODOO_REPO/archive/$ODOO_COMMIT.tar.gz"
@@ -43,7 +43,7 @@ if [ ! -f ".heroku/odoo/stack.json" ] || [ `echo $STACK | $JQ -cS .` != `$JQ -cS
   #mv ./odoo_tmp/addons /app/.heroku/python/addons -v
 
   # Keep stack
-  echo $STACK > /app/.heroku/odoo/stack.json
+  echo $STACK > /app/.heroku/python/stack.json
 
   if [ ! -f "./odoo_requirements.txt" ]; then
     cp ./odoo_tmp/requirements.txt /app/.heroku/odoo_requirements.txt
