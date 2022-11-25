@@ -40,7 +40,7 @@ if [ ! -f ".heroku/odoo/stack.json" ] || [ `echo $STACK | $JQ -cS .` != `$JQ -cS
   pip install --upgrade --no-dependencies --src=./.heroku/src --disable-pip-version-check --no-cache-dir ./odoo_tmp 2>&1 | tee $WARNINGS_LOG | cleanup-pip-output | indent
   
   #rm -rf .heroku/odoo/addons &> /dev/null || true
-  mv ./odoo_tmp/addons /app/.heroku/python/addons -v
+  #mv ./odoo_tmp/addons /app/.heroku/python/addons -v
 
   # Keep stack
   echo $STACK > /app/.heroku/odoo/stack.json
