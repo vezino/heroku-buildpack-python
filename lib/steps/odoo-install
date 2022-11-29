@@ -24,7 +24,7 @@ if [ ! -f ".heroku/python/stack.json" ] || [ `echo $STACK | $JQ -cS .` != `$JQ -
 
   mkdir ./odoo_tmp
   puts-line "Fetching $ODOO_REPO (${ODOO_BRANCH}) @ (${ODOO_COMMIT})"
-  curl -sL $ODOO_ARCHIVE 2> /dev/null | tar xz -C ./odoo_tmp --strip 1
+  curl -sL $ODOO_ARCHIVE 2> /dev/null | tar xz -C .heroku/python/odoo_tmp --strip 1
 
   puts-line "python version"
   python --version
