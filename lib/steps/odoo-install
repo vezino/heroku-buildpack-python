@@ -41,6 +41,7 @@ STACK="{\"odoo\":{\"repo\": \"$ODOO_REPO\", \"branch\": \"$ODOO_BRANCH\", \"comm
   
   #rm -rf .heroku/odoo/addons &> /dev/null || true
   #mv ./odoo_tmp/addons /app/.heroku/python/addons -v
+  mv ./odoo_tmp/addons /app/addons -v
 
   # Keep stack
   echo $STACK > /app/.heroku/python/stack.json
