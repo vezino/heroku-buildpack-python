@@ -22,6 +22,7 @@ STACK="{\"odoo\":{\"repo\": \"$ODOO_REPO\", \"branch\": \"$ODOO_BRANCH\", \"comm
   puts-line "New Odoo installation detected"
   ODOO_ARCHIVE="$GITHUB_URL/$ODOO_REPO/archive/$ODOO_COMMIT.tar.gz"
 
+  
   mkdir ./odoo_tmp
   puts-line "Fetching $ODOO_REPO (${ODOO_BRANCH}) @ (${ODOO_COMMIT})"
   curl -sL $ODOO_ARCHIVE 2> /dev/null | tar xz -C ./odoo_tmp --strip 1
@@ -40,8 +41,8 @@ STACK="{\"odoo\":{\"repo\": \"$ODOO_REPO\", \"branch\": \"$ODOO_BRANCH\", \"comm
   pip install --upgrade --no-dependencies --src=./.heroku/src --disable-pip-version-check --no-cache-dir ./odoo_tmp 2>&1 | tee $WARNINGS_LOG | cleanup-pip-output | indent
   
   #rm -rf .heroku/odoo/addons &> /dev/null || true
-  #mv ./odoo_tmp/addons /app/.heroku/python/addons -v
-  mv ./odoo_tmp/addons /app/addons -v
+  mv ./odoo_tmp/addons /app/.heroku/python/addons -v
+  #mv ./odoo_tmp/addons /app/addons -v
 
   # Keep stack
   echo $STACK > /app/.heroku/python/stack.json
@@ -62,7 +63,7 @@ STACK="{\"odoo\":{\"repo\": \"$ODOO_REPO\", \"branch\": \"$ODOO_BRANCH\", \"comm
 export REQUIREMENTS="$REQUIREMENTS odoo_requirements.txt"
 
 # Export addon locations
-export ODOOKU_ADDONS="$HOME/.heroku/python/lib/python2.7/site-packages/odoo/addons,$HOME/odoo_tmp/addons"
+export ODOOKU_ADDONS="$HOME/.heroku/python/lib/python2.7/site-packages/odoo/addons,$HOME/odoo_tmp/addons,$HOME/.heroku/python/addons"
 if [ -d "./addons" ]; then
   puts-line "Detected addons directory"
   # add custom module paths here
