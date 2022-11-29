@@ -22,7 +22,7 @@ STACK="{\"odoo\":{\"repo\": \"$ODOO_REPO\", \"branch\": \"$ODOO_BRANCH\", \"comm
   puts-line "New Odoo installation detected"
   ODOO_ARCHIVE="$GITHUB_URL/$ODOO_REPO/archive/$ODOO_COMMIT.tar.gz"
 
-  
+  rm /app/.heroku/python/addons
   mkdir ./odoo_tmp
   puts-line "Fetching $ODOO_REPO (${ODOO_BRANCH}) @ (${ODOO_COMMIT})"
   curl -sL $ODOO_ARCHIVE 2> /dev/null | tar xz -C ./odoo_tmp --strip 1
