@@ -17,7 +17,7 @@ fi
 STACK="{\"odoo\":{\"repo\": \"$ODOO_REPO\", \"branch\": \"$ODOO_BRANCH\", \"commit\": \"$ODOO_COMMIT\"}}"
 
 # See if anything has changed
-#if [ ! -f ".heroku/python/stack.json" ] || [ `echo $STACK | $JQ -cS .` != `$JQ -cS . .heroku/python/stack.json` ]; then
+if [ ! -f ".heroku/python/stack.json" ] || [ `echo $STACK | $JQ -cS .` != `$JQ -cS . .heroku/python/stack.json` ]; then
 
   puts-line "New Odoo installation detected"
   ODOO_ARCHIVE="$GITHUB_URL/$ODOO_REPO/archive/$ODOO_COMMIT.tar.gz"
@@ -55,9 +55,9 @@ STACK="{\"odoo\":{\"repo\": \"$ODOO_REPO\", \"branch\": \"$ODOO_BRANCH\", \"comm
 
   # Cleanup
   #rm -rf ./odoo_tmp
-#else
+else
   puts-line "Odoo installation is up to date"
-#fi
+fi
 
 # Export additional requirements
 export REQUIREMENTS="$REQUIREMENTS odoo_requirements.txt"
